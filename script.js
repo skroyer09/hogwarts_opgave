@@ -16,7 +16,7 @@ const Student = {
 
 const settings = {
   filter: "all",
-  sortBy: "name",
+  sortBy: "last_name",
   sortDir: "asc",
 };
 
@@ -31,7 +31,10 @@ function start() {
 function registerButtons() {
   document.querySelectorAll("[data-action='filter']").forEach((button) => button.addEventListener("click", selectFilter));
 
-  document.querySelectorAll("[data-action='sort']").forEach((button) => button.addEventListener("click", selectSort));
+  document.querySelectorAll("[data-action='sort']").forEach((button) => {
+    button.addEventListener("click", selectSort);
+    button.dataset.sortDirection = "asc";
+  });
 }
 
 async function loadJSON() {
@@ -106,14 +109,19 @@ function capName(string) {
 
 function prepareObject(jsonObject) {
   const student = Object.create(Student);
-
   const fullName = capName(jsonObject.fullname);
   const texts = fullName.split(" ");
   student.first_name = texts[0];
+  student.middle_name = texts[1];
   student.last_name = capName(texts[texts.length - 1]);
-
   student.gender = capName(jsonObject.gender);
   student.house = capName(jsonObject.house);
+  if (texts.length > 2) {
+    const middle_name = texts.slice(1, texts.length - 1);
+    student.middle_name = middle_name.map(capName).join(" ");
+  } else if (texts.length === 2) {
+    student.middle_name = null;
+  }
 
   return student;
 }
@@ -131,12 +139,9 @@ function setFilter(filter) {
 }
 
 function filterList(filteredList) {
-  // let filteredList = allStudents;
   if (settings.filterBy === "Girl") {
-    // create a filtered list of only girls
     filteredList = allStudents.filter(isGirl);
   } else if (settings.filterBy === "Boy") {
-    // create a filtered list of only boys
     filteredList = allStudents.filter(isBoy);
   } else if (settings.filterBy == "Gryffindor") {
     filteredList = allStudents.filter(isGryffindor);
@@ -146,6 +151,12 @@ function filterList(filteredList) {
     filteredList = allStudents.filter(isRavenclaw);
   } else if (settings.filterBy == "Hufflepuff") {
     filteredList = allStudents.filter(isHufflepuff);
+  } else if (settings.filterby == "First_name") {
+    filteredList = allStudents.filter(isFirst_name);
+  } else if (settings.filterby == "Last_name") {
+    filteredList = allStudents.filter(isLast_name);
+  } else if (settings.filterby == "middle_name") {
+    filteredList = allStudents.filter(isMiddle_name);
   }
 
   return filteredList;
@@ -175,10 +186,22 @@ function isHufflepuff(student) {
   return student.house === "Hufflepuff";
 }
 
+function isFirst_name(student) {
+  return student.names === "First_name";
+}
+
+function isLast_name(student) {
+  return student.name === "Last_name";
+}
+
+function isMiddle_name(student) {
+  return student.name === "Middle_name";
+}
+
 function selectSort(event) {
   const sortBy = event.target.dataset.sort;
   const sortDir = event.target.dataset.sortDirection;
-
+  console.log("SELECTSORT sortBy", event.target);
   // find "old" sortby element, and remove .sortBy
   const oldElement = document.querySelector(`[data-sort='${settings.sortBy}']`);
   oldElement.classList.remove("sortby");
@@ -204,6 +227,7 @@ function setSort(sortBy, sortDir) {
 
 function sortList(sortedList) {
   // let sortedList = allStudents;
+  console.log("settings.sortBy", settings.sortBy);
   let direction = 1;
   if (settings.sortDir === "desc") {
     direction = -1;
@@ -239,6 +263,10 @@ function displayList(student) {
   student.forEach(displayStudent);
 }
 
+function showImage(firstname, lastname) {
+  return `images/${lastname.toLowerCase()}_${firstname.charAt(0).toLowerCase()}.png`;
+}
+
 function displayList(students) {
   // clear the list
   document.querySelector("#list tbody").innerHTML = "";
@@ -253,6 +281,7 @@ function displayStudent(student) {
 
   // set clone data
   clone.querySelector("[data-field=first_name]").textContent = student.first_name;
+  clone.querySelector("[data-field=middle_name]").textContent = student.middle_name;
   clone.querySelector("[data-field=last_name]").textContent = student.last_name;
   clone.querySelector("[data-field=gender]").textContent = student.gender;
   clone.querySelector("[data-field=house]").textContent = student.house;

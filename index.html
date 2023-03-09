@@ -11,13 +11,11 @@
     <h1>Hogwarts</h1>
     <p>
       Filter:
-      <button class="filter" data-action="filter" data-filter="Boy">Boys</button>
-      <button class="filter" data-action="filter" data-filter="Girl">Girls</button>
+      <button class="filter" data-action="filter" data-filter="*">all</button>
       <button class="filter" data-action="filter" data-filter="Gryffindor">Gryffindor</button>
       <button class="filter" data-action="filter" data-filter="Slytherin">Slytherin</button>
       <button class="filter" data-action="filter" data-filter="Ravenclaw">Ravenclaw</button>
       <button class="filter" data-action="filter" data-filter="Hufflepuff">Hufflepuff</button>
-      <button class="filter" data-action="filter" data-filter="*">all</button>
     </p>
 
     <hr />
@@ -25,20 +23,19 @@
     <table id="list">
       <thead>
         <tr id="sorting">
-          <th data-action="sort" data-sort-direction="asc" data-sort="first_name">First Name</th>
-          <th data-action="sort" data-sort-direction="asc" data-sort="last_name">Last Name</th>
-          <th data-action="sort" data-sort-direction="asc" data-sort="gender">Gender</th>
-          <th data-action="sort" data-sort-direction="asc" data-sort="house">House</th>
+          <button data-action="sort" data-sort-direction="asc" data-sort="first_name">First Name</button>
+          <button data-action="sort" data-sort-direction="asc" data-sort="middle_name">Middle Name</button>
+          <button data-action="sort" data-sort-direction="asc" data-sort="last_name">Last Name</button>
+          <button data-action="sort" data-sort-direction="asc" data-sort="gender">Gender</button>
         </tr>
       </thead>
-      <tbody>
-        <!-- animal template will be copied and inserted here -->
-      </tbody>
+      <tbody></tbody>
     </table>
 
     <template id="student">
       <tr>
         <td data-field="first_name">First Name</td>
+        <td data-field="middle_name">Middle Name</td>
         <td data-field="last_name">Last Name</td>
         <td data-field="gender">Gender</td>
         <td data-field="house">House</td>
