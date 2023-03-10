@@ -10,12 +10,11 @@
   <body>
     <h1>Hogwarts</h1>
     <p>
-      Filter:
       <button class="filter" data-action="filter" data-filter="*">all</button>
-      <button class="filter" data-action="filter" data-filter="Gryffindor">Gryffindor</button>
-      <button class="filter" data-action="filter" data-filter="Slytherin">Slytherin</button>
-      <button class="filter" data-action="filter" data-filter="Ravenclaw">Ravenclaw</button>
-      <button class="filter" data-action="filter" data-filter="Hufflepuff">Hufflepuff</button>
+      <button class="filter" id="Gryffindor" data-action="filter" data-filter="Gryffindor">Gryffindor</button>
+      <button class="filter" id="Slytherin" data-action="filter" data-filter="Slytherin">Slytherin</button>
+      <button class="filter" id="Ravenclaw" data-action="filter" data-filter="Ravenclaw">Ravenclaw</button>
+      <button class="filter" id="Hufflepuff" data-action="filter" data-filter="Hufflepuff">Hufflepuff</button>
     </p>
 
     <hr />
@@ -23,10 +22,10 @@
     <table id="list">
       <thead>
         <tr id="sorting">
-          <button data-action="sort" data-sort-direction="asc" data-sort="first_name">First Name</button>
-          <button data-action="sort" data-sort-direction="asc" data-sort="middle_name">Middle Name</button>
-          <button data-action="sort" data-sort-direction="asc" data-sort="last_name">Last Name</button>
-          <button data-action="sort" data-sort-direction="asc" data-sort="gender">Gender</button>
+          <button class="filter" data-action="sort" data-sort-direction="asc" data-sort="first_name">First Name</button>
+          <button class="filter" data-action="sort" data-sort-direction="asc" data-sort="middle_name">Middle Name</button>
+          <button class="filter" data-action="sort" data-sort-direction="asc" data-sort="last_name">Last Name</button>
+          <button class="filter" data-action="sort" data-sort-direction="asc" data-sort="gender">Gender</button>
         </tr>
       </thead>
       <tbody></tbody>

@@ -2,31 +2,154 @@
   cursor: pointer;
 }
 
-#sorting th.sortby {
+/* Apply a background color to the body */
+body {
+  background-color: #f2f2f2;
+}
+
+/* Style the header */
+h1 {
+  text-align: center;
+  font-size: 3em;
+  margin-top: 0;
+  padding: 20px 0;
+  color: #8b0000;
+  text-shadow: 2px 2px 2px #ccc;
+}
+
+/* Style the filter buttons */
+.filter {
+  padding: 10px 20px;
+  border: 2px solid #8b0000;
+  border-radius: 30px;
+  background-color: transparent;
+  color: #8b0000;
+  font-size: 1.2em;
+  margin-right: 10px;
+  transition: all 0.3s ease-in-out;
+}
+
+.filter:hover {
+  background-color: #8b0000;
+  color: #fff;
+}
+
+.filter[data-filter="*"] {
+  margin-left: 20px;
+}
+
+#sorting {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.button {
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  background-color: white;
+  color: #333;
+  padding: 8px;
+  margin-right: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+button:hover {
+  transform: translateY(-5px);
+  background-color: #ddd;
+}
+
+button:active {
+  background-color: #bbb;
+}
+
+button[data-sort-direction="asc"]::after {
+  content: " ▲";
+}
+
+button[data-sort-direction="desc"]::after {
+  content: " ▼";
+}
+
+button.sortby {
   text-decoration: underline;
 }
 
-#sorting th.sortby[data-sort-direction="asc"]::after {
-  content: "⇓";
-}
-
-#sorting th.sortby[data-sort-direction="desc"]::after {
-  content: "⇑";
-}
-
+/* Style the table */
 #list {
+  width: 100%;
   border-collapse: collapse;
+  margin-top: 40px;
+  font-size: 1.2em;
+  color: #333;
 }
 
-#list tbody tr td {
-  padding: 4px;
+/* Style the table header */
+#list th {
+  background-color: #8b0000;
+  color: #fff;
+  padding: 10px;
+  text-align: left;
 }
 
-#list tbody tr:nth-child(odd) td {
-  background-color: lightblue;
-  border-right: rgb(240, 249, 255) 1px dotted;
+/* Style the table sorting buttons */
+#list th button {
+  background-color: transparent;
+  border: none;
+  color: #fff;
+  font-size: 1.2em;
+  text-transform: uppercase;
 }
 
-#list tbody tr:nth-child(even) td {
-  border-right: rgb(171, 219, 252) 1px dotted;
+#list th button:focus {
+  outline: none;
+}
+
+#list th button::after {
+  content: "";
+  display: inline-block;
+  margin-left: 5px;
+  font-size: 0.8em;
+  opacity: 0.5;
+}
+
+#list th.sortby::after {
+  opacity: 1;
+}
+
+/* Style the table rows */
+#list tbody tr {
+  background-color: #fff;
+  border-bottom: 1px solid #ccc;
+}
+
+#list tbody tr:hover {
+  background-color: #f2f2f2;
+}
+
+#list tbody tr:nth-child(odd) {
+  background-color: #f9f9f9;
+}
+
+#list tbody td {
+  padding: 10px;
+}
+
+/* Style the student data fields */
+#list tbody td[data-field="first_name"],
+#list tbody td[data-field="middle_name"],
+#list tbody td[data-field="last_name"] {
+  font-weight: bold;
+}
+
+#list tbody td[data-field="gender"] {
+  text-transform: capitalize;
+}
+
+#list tbody td[data-field="house"] {
+  text-transform: uppercase;
+  font-weight: bold;
 }
